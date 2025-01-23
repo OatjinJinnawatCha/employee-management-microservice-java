@@ -1,11 +1,10 @@
 package oatjin.ems_java_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name= "employee")
 public class Employee {
@@ -32,11 +31,16 @@ public class Employee {
     @Column(name="job_title")
     private String jobTitle;
 
-// Generate Constructor
-    public Employee() {
-    }
+    @Column(name = "date_added", nullable = false)
+    private LocalDateTime dateAdded;
 
-    public Employee(int id, String firstName, String lastName, String nickName, String email, String department, String jobTitle) {
+    @Column(name="updated_date")
+    private Timestamp updatedDate;
+
+    @Column(name="employee_code", nullable = false)
+    private String employeeCode;
+
+    public Employee(int id, String firstName, String lastName, String nickName, String email, String department, String jobTitle, LocalDateTime dateAdded, Timestamp updated_date, String employeeCode) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,9 +48,13 @@ public class Employee {
         this.email = email;
         this.department = department;
         this.jobTitle = jobTitle;
+        this.dateAdded = dateAdded;
+        this.updatedDate = updated_date;
+        this.employeeCode = employeeCode;
     }
 
-//    Generate Getter Setter
+    public Employee() {
+    }
 
     public int getId() {
         return id;
@@ -102,5 +110,29 @@ public class Employee {
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+    }
+
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDateTime dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public String getEmployeeCode() {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode) {
+        this.employeeCode = employeeCode;
+    }
+
+    public Timestamp getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Timestamp updated_date) {
+        this.updatedDate = updated_date;
     }
 }
